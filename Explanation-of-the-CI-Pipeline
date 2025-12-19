@@ -1,0 +1,75 @@
+Explanation of the CI Pipeline
+1. Workflow Name
+yaml
+name: CI Pipeline
+This is just a label for your workflow.
+
+It will appear in the GitHub Actions tab as “CI Pipeline”.
+
+2. Triggers (When It Runs)
+yaml
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+push → Runs whenever you push code to the main branch.
+
+pull_request → Runs whenever someone opens a pull request targeting the main branch.
+
+This ensures your pipeline checks code before merging into the main branch.
+
+3. Jobs Section
+yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+jobs → Defines tasks the workflow will perform.
+
+build → Name of the job.
+
+runs-on: ubuntu-latest → The job runs inside a fresh Ubuntu virtual machine provided by GitHub.
+
+4. Steps (What It Does)
+Steps are executed in order inside the job.
+
+🔹 Step 1: Checkout Code
+yaml
+- name: Checkout code
+  uses: actions/checkout@v3
+Downloads your repository into the virtual machine.
+
+Without this, the pipeline wouldn’t have access to your code.
+
+🔹 Step 2: Set Up Python
+yaml
+- name: Set up Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: '3.9'
+Installs Python 3.9 in the VM.
+
+Ensures your app runs with the correct version.
+
+🔹 Step 3: Install Dependencies
+yaml
+- name: Install dependencies
+  run: |
+    pip install flask
+    pip install pytest
+Installs required packages:
+
+Flask → for your app.
+
+Pytest → for testing.
+
+You could also use a requirements.txt file here.
+
+🔹 Step 4: Run Tests
+yaml
+- name: Run tests
+  run: |
+    pytest
+Executes your test suite using Pytest.
+
+If tests fail, the pipeline fails — preventing bad code from merging.
