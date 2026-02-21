@@ -5,7 +5,7 @@ services:
     ports:
       - "5000:5000"
     labels:
-      - "prometheus-job=todo-app"
+      - "prometheus-job=python-app"
 
   prometheus:
     image: prom/prometheus
