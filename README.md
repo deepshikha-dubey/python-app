@@ -16,6 +16,11 @@ Step 3: Containerization
 * docker build -t todo-app .
 * docker run -p 5000:5000 todo-app
 
+Step 4: Multi-Container Setup
+ * Create docker-compose.yml:
+ * Run CMD:
+ * docker-compose up
+
 Step 4: CI/CD with GitHub Actions
   * Create .github/workflows/ci.yml:
   * Push changes and watch the pipeline run on GitHub.
